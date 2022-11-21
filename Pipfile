@@ -1,0 +1,6 @@
+[scripts]
+"build:report" = "sh ./scripts/build:report.sh"
+"watch:report" = "nodemon -e tex --watch ./docs/report --exec ./scripts/build:report.sh"
+
+[packages]
+
