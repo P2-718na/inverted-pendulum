@@ -1,0 +1,26 @@
+{
+  "name": "inverted-pendulum",
+  "version": "1.0.0",
+  "description": "tbd",
+  "main": " ",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build:report": "sh scripts/build:report.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/P2-718na/inverted-pendulum.git",
+    "watch:report": "nodemon -e tex --watch ./docs/report --exec ./scripts/build:report.sh"
+  },
+  "author": "Matteo Bonacini @P2-718na",
+  "license": "AGPLv3",
+  "bugs": {
+    "url": "https://github.com/P2-718na/inverted-pendulum/issues"
+  },
+  "homepage": "https://github.com/P2-718na/inverted-pendulum#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
