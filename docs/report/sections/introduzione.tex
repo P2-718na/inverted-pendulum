@@ -1,2 +1,59 @@
 \section{Introduzione}\label{sec:introduzione}
-Introduzione
+\subsection{Pendolo invertito}\label{subsec:intro-pendolo}
+  Il pendolo invertito su rotaia è un sistema classico studiato dalla teoria del controllo.
+  Il problema che ci si pone è il seguente:
+  \begin{framed}
+  \emph{
+      Un pendolo è posto su un carrello libero di muoversi orizzontalmente su una rotaia.
+      Il carrello è dotato di un motore che gli permette di accelerare. Conoscendo lo stato del sistema
+      $\bf x$, trovare un espressione per la forzante esercitata dal motore $\bf u = \bf u(\bf x)$ che faccia sì
+      che il pendolo rimanga orientato verso l'alto.
+    }
+  \end{framed}
+
+  Una descrizione formale del sistema è data dal diagramma in fig.%todo add ref
+  % todo add figure
+  dove $\mathbf y$ è l'output del sistema, $\mathbf x$ e $\bf f$ sono rispettivamente
+  lo \emph{stato interno} e la \emph{legge di evoluzione} del sistema. $\mathbf y$, $\mathbf x$ e $\bf f$ sono
+  \emph{vettori colonna}.
+
+\subsection{Controller \textsc{LQG}}\label{subsec:intro-lqg}
+Per controllare un sistema di questo tipo (\ref{subsec:intro-pendolo}), dobbiamo tenere presente dei seguenti vincoli:
+\begin{enumerate}
+  \item%
+    La forzante $\bf u$ ha un certo costo associato.
+    Questo è da intendersi sia come costo \emph{materiale} (i.e. il costo della corrente per mettere in moto
+    il motore) ma, soprattutto, anche come costo \emph{fisico} (i.e. non si può realizzare un motore che ha potenza
+    infinita).
+  \item%
+    Si può osservare solamente una parte $\bf y$ dello stato $x$ del sistema.
+    Le osservazioni, inoltre, sono soggette a un certo rumore $\bf w_d$.
+\end{enumerate}
+
+Un controller \textsc{LQG}, definito in (REFF) permette di risolvere questi vincoli in modo ottimale, grazie
+alla proposizione (reff) %todo qui ci va una ref
+% also todo, magari cita il libro di Brunton
+\begin{framed} %todo fai qualcosa di carino
+  Un controller \textsc{LQG} è un sistema dinamico con input $\bf y$, output $\bf u$ e stato interno
+  $\hat{\bf x}$:
+  \begin{equation}\label{eq:lqg}
+    \begin{aligned}[c]
+      \frac d {dt} \hat {\bf x} &= (A-K_f C - B K_r) \hat{\bf x} + K_f \bf y \\ %fixme matrices need to be not itlaics
+      \bf u               &= -K_r \hat{\bf x}
+    \end{aligned}
+  \end{equation}
+\end{framed}
+\begin{framed} %todo fai qualcosa di carino
+  Il controller descritto in %todo ref
+  minimizza la seguente funzione di costo, mediata su molte realizzazioni del rumore $\bf w_d$:
+  \begin{equation}\label{eq:lqg-costo}
+    J(t) \doteq \left<
+      \int_0^t  ds\ \bf{x} (s)^* Q \bf {x} (s) + \bf {u} (s)^* R \bf {u} (s) %todo t o +\infty?
+      % fixme capire come mai bf sminchia tutto
+    \right>
+  \end{equation}
+\end{framed}
+
+
+
+\subsection{Controller\textsc{PID}}\label{subsec:intro-pid}

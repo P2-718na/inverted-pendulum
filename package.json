@@ -7,12 +7,12 @@
     "doc": "docs"
   },
   "scripts": {
-    "build:report": "sh scripts/build:report.sh"
+    "build:report": "sh scripts/build:report.sh",
+    "watch:report": "nodemon -e tex --watch ./docs/report --exec ./scripts/build:report.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/P2-718na/inverted-pendulum.git",
-    "watch:report": "nodemon -e tex --watch ./docs/report --exec ./scripts/build:report.sh"
+    "url": "git+https://github.com/P2-718na/inverted-pendulum.git"
   },
   "author": "Matteo Bonacini @P2-718na",
   "license": "AGPLv3",
