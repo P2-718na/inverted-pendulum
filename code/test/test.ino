@@ -10,7 +10,8 @@ Motor mot;
 Timer controlTimer;
 Timer driftTimer;
 
-double c[] = {30.789042, 20.549323, 67.716816, 12.689277};
+double c[] = {3.632804, 3.756332, 21.187745, 3.708041};
+//double c[] = {30.789042, 20.549323, 67.716816, 12.689277};
 double A = .251;
 double B = .0473;
 double C = .00804;
@@ -35,12 +36,12 @@ void control() {
   double f = c[0]*(x-.175) + c[1]*v + c[2]*a + c[3]*w;
   // .02 = deltaT, 0.2593640128 = mass
   // QUesto .6 dovrebbe essere la massa ma ok i guess va bene così
-  double u = ((1 - A)*v + .02 * f/ .62 + copysignf(C, v)) / B;
+  double u = ((1 - A)*v + .02 * f/ .259 + copysignf(C, v)) / B;
 
   mot.drive(u*255./12.);
 
   //Serial.println();
-  //#define DEBUG
+  #define DEBUG
   #ifdef DEBUG
     Serial.print(x);
     Serial.print(" ");
@@ -75,7 +76,7 @@ void setup() {
   controlTimer.setCallback(control);
   controlTimer.start();
 
-  driftTimer.setInterval(1000);
+  driftTimer.setInterval(3000);
   driftTimer.setCallback(zeroPosition);
   driftTimer.start();
 }

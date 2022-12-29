@@ -31,8 +31,8 @@ print A,B
 #Q = np.matrix("1 0 0 0; 0 .0001 0 0 ; 0 0 1 0; 0 0 0 .0001")
 #R = np.matrix(".0005")
 
-Q = np.matrix("1 0 0 0; 0 .0001 0 0 ; 0 0 1 0; 0 0 0 .0001")
-R = np.matrix(".0005")
+Q = np.matrix(".1 0 0 0; 0 .0001 0 0 ; 0 0 1 0; 0 0 0 .0001")
+R = np.matrix(".005")
 
 
 K = dlqr(A,B,Q,R)

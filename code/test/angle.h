@@ -10,7 +10,7 @@
 class Angle {
   private:
     AS5600 encoder;
-    RunningAverage wRA = RunningAverage(8);
+    RunningAverage wRA = RunningAverage(6);
     AverageAngle AA = AverageAngle(1); // 1 = radians
 
     int zeroAngle;
