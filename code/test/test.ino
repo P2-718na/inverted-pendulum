@@ -8,6 +8,7 @@ Angle* ang;
 Motor mot;
 
 Timer controlTimer;
+Timer driftTimer;
 
 double c[] = {30.789042, 20.549323, 67.716816, 12.689277};
 double A = .251;
@@ -33,12 +34,13 @@ void control() {
 
   double f = c[0]*(x-.175) + c[1]*v + c[2]*a + c[3]*w;
   // .02 = deltaT, 0.2593640128 = mass
-  double u = ((1 - A)*v + .02 * f/ .259 + copysignf(C, v)) / B;
+  // QUesto .6 dovrebbe essere la massa ma ok i guess va bene così
+  double u = ((1 - A)*v + .02 * f/ .62 + copysignf(C, v)) / B;
 
-  mot.drive(u*255./12. / 2);
+  mot.drive(u*255./12.);
 
   //Serial.println();
-  #define DEBUG
+  //#define DEBUG
   #ifdef DEBUG
     Serial.print(x);
     Serial.print(" ");
@@ -49,6 +51,12 @@ void control() {
     Serial.print(w);
     Serial.println();
   #endif
+}
+
+void zeroPosition() {
+  pos.oldPos = pos.pos - pos.oldPos;
+  pos.pos = pos.x_abs() / EFFECTIVE_RADIUS;
+  pos.oldPos = pos.pos - pos.oldPos;
 }
 
 void setup() {
@@ -66,6 +74,10 @@ void setup() {
   controlTimer.setInterval(20);
   controlTimer.setCallback(control);
   controlTimer.start();
+
+  driftTimer.setInterval(1000);
+  driftTimer.setCallback(zeroPosition);
+  driftTimer.start();
 }
 
 double time;
@@ -80,6 +92,7 @@ void loop() {
   pos.loop(dt);
   ang->loop(dt);
   controlTimer.update();
+  driftTimer.update();
 
   if (!controllable) {
     if (digitalRead(3) == LOW) {

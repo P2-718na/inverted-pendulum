@@ -15,9 +15,6 @@ class Position {
     RunningAverage speedRA = RunningAverage(6);
     AverageAngle AA = AverageAngle(1); // 1 = radians
 
-    // Counter
-    long pos;
-    long oldPos;
 
     // Current sensor rotation
     int value;
@@ -26,6 +23,10 @@ class Position {
     int readAngleAverage();
 
   public:
+    // Counter
+    long pos;
+    long oldPos;
+
     Position(char encoderPin = A0, int ultrasonicPin = 12);
 
     float x_abs();
