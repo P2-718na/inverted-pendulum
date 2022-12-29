@@ -41,7 +41,7 @@ void control() {
   mot.drive(u*255./12.);
 
   //Serial.println();
-  #define DEBUG
+  //#define DEBUG
   #ifdef DEBUG
     Serial.print(x);
     Serial.print(" ");
