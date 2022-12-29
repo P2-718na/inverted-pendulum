@@ -38,7 +38,7 @@ Position::Position(char encoderPin, int ultrasonicPin) {
   us.attach(ultrasonicPin, ultrasonicPin, 0, 100);
 
   // Setup initial position
-  pos = x_abs() / EFFECTIVE_RADIUS - readAngleAverage();
+  pos = (x_abs() + x_abs() + x_abs() + x_abs()) / 4. / EFFECTIVE_RADIUS - readAngleAverage();
   oldValue = readAngleAverage();
 
   // speed running average
