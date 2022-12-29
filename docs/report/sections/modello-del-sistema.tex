@@ -1,2 +1,103 @@
-\section{Modello e realizzazione del sistema}\label{sec:modello}
-2
+\section{Modello e implementazione del sistema}\label{sec:modello}
+\subsection{Modello del sistema}\label{subsec:modello-del-sistema}
+Per studiare il sistema, devo ricavare le equazioni del moto e devo linearizzarle attorno ai punti di equilibrio.
+Terrò conto delle seguenti assunzioni:
+
+\begin{enumerate}
+  \item%
+  Voglio risolvere il problema del pendolo invertito solo per condizioni iniziali prossime ai punti di equilibrio
+  (strategie di \emph{swing-up} e \emph{swing-down} non sono oggetto del mio studio.
+  \item%
+  Gli attriti sono trascurabili.
+  \item%
+  Il sistema è controllabile (\emph{Dimostrerò} questa assunzione nella sezione %todo add ref)
+\end{enumerate}
+
+Il sistema è descritto in figura %todo add figura.
+Notare che la variabile generalizzata $x$ e lo stato del sistema $\bf x$ sono due cose diverse. Non ci sarà confusione,
+visto che una è scritta in grassetto e l'altra no.
+
+La Lagrangiana del sistema non lineare è:
+\begin{equation}
+  \mathcal L = \frac 1 2
+  \label{eq:lagrangiana}
+\end{equation}
+
+Risolvendo le equazioni di Eulero trovo le equazioni del moto:
+\begin{equation}
+  \left\{
+    \begin{aligned}
+      \ddot x &= culo \\
+      \ddot \theta &= culo
+    \end{aligned}
+  \right.
+  \label{eq:eq-moto}
+\end{equation}
+
+Riduco di uno l'ordine del sistema.
+\begin{equation}
+  \dot {\bf x} = \bf f =
+  \left\{
+    \begin{aligned}
+      \dot x &= v \\
+      \dot v &= culo \\
+      \dot \theta &= \omega \\
+      \dot \omega &= culo
+    \end{aligned}
+  \right.
+  \label{eq:eq-1-grado}
+\end{equation}
+
+I punti di equilibrio del sistema \eqref{eq:eq-1-grado} sono:
+\begin{equation}
+  \begin{aligned}
+    \bf x_I &= (x, 0, 0, 0) \to & \text{instabile} \\
+    \bf x_S &= (x, 0, \pi, 0) \to & \text{stabile}
+  \end{aligned}
+  \label{eq:punti-equilibrio}
+\end{equation}
+
+Linearizzo le equazioni \eqref{eq:eq-1-grado} attorno a $\bf x_I$.
+Calcolo la Jacobiana:
+\begin{equation}
+  J_{\bf f}(\bf x_I) =
+  \left(
+    \begin{matrix}
+      0 & 1 & 1 & 1 & 1\\
+      1 & 0 & 1 & 1 & 1\\
+      1 & 1 & 0 & 1 & 1\\
+      1 & 1 & 1 & 0 & 1
+    \end{matrix}
+  \right)
+  \label{eq:jacobiana}
+\end{equation}
+
+Il sistema linearizzato può essere scritto nella forma $\dot {\bf x} = A\bf x + B \bf u$, dove $A$ e $B$ valgono:
+\begin{equation}
+  A =
+  \left(
+  \begin{matrix}
+    0 & 1 & 1 & 1\\
+    1 & 0 & 1 & 1\\
+    1 & 1 & 0 & 1\\
+    1 & 1 & 1 & 0
+  \end{matrix}
+  \right)
+  \hspace{10px}
+  B =
+  \left(
+  \begin{matrix}
+    1\\
+    1\\
+    1\\
+    0
+  \end{matrix}
+  \right)
+  \label{eq:A-e-B}
+\end{equation}
+
+\subsection{Implementazione del sistema}\label{subsec:implementazione-del-sistema}
+Ho realizzato il sistema modellato in sezione \ref{subsec:modello-del-sistema}, così come descritto in fig. %todo add figura
+La scelta dei componenti garantisce che l'attrito sia trascurabile.
+Una serie di sensori permette di misurare lo stato del sistema.
+Per maggiori dettagli sui componenti utilizzati, consultare l'appendice %todo add ref

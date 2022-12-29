@@ -11,7 +11,7 @@
     }
   \end{framed}
 
-  Una descrizione formale del sistema è data dal diagramma in fig.%todo add ref
+  Una descrizione formale del sistema è data dal diagramma in fig. %todo add ref
   % todo add figure
   dove $\mathbf y$ è l'output del sistema, $\mathbf x$ e $\bf f$ sono rispettivamente
   lo \emph{stato interno} e la \emph{legge di evoluzione} del sistema. $\mathbf y$, $\mathbf x$ e $\bf f$ sono
@@ -31,29 +31,35 @@ Per controllare un sistema di questo tipo (\ref{subsec:intro-pendolo}), dobbiamo
 \end{enumerate}
 
 Un controller \textsc{LQG}, definito in (REFF) permette di risolvere questi vincoli in modo ottimale, grazie
-alla proposizione (reff) %todo qui ci va una ref
+alla proposizione (reff). %todo qui ci va una ref
 % also todo, magari cita il libro di Brunton
+
 \begin{framed} %todo fai qualcosa di carino
   Un controller \textsc{LQG} è un sistema dinamico con input $\bf y$, output $\bf u$ e stato interno
   $\hat{\bf x}$:
-  \begin{equation}\label{eq:lqg}
+  \begin{equation}
     \begin{aligned}[c]
       \frac d {dt} \hat {\bf x} &= (A-K_f C - B K_r) \hat{\bf x} + K_f \bf y \\ %fixme matrices need to be not itlaics
       \bf u               &= -K_r \hat{\bf x}
     \end{aligned}
+    \label{eq:lqg}
   \end{equation}
 \end{framed}
 \begin{framed} %todo fai qualcosa di carino
   Il controller descritto in %todo ref
   minimizza la seguente funzione di costo, mediata su molte realizzazioni del rumore $\bf w_d$:
-  \begin{equation}\label{eq:lqg-costo}
+  \begin{equation}
     J(t) \doteq \left<
       \int_0^t  ds\ \bf{x} (s)^* Q \bf {x} (s) + \bf {u} (s)^* R \bf {u} (s) %todo t o +\infty?
       % fixme capire come mai bf sminchia tutto
     \right>
+    \label{eq:lqg-costo}
   \end{equation}
 \end{framed}
 
+Un controller \textsc{LQG} equivale all'unione di un controller \textsc{LQR} e di un filtro di Kalman.
+Per approfondimenti, consultare %todo bib ref
 
 
-\subsection{Controller\textsc{PID}}\label{subsec:intro-pid}
+\subsection{Controller \textsc{PID}}\label{subsec:intro-pid}
+%todo da fare nel caso in cui questa cosa mi serva davvero
