@@ -54,6 +54,10 @@ float Angle::w() {
 void Angle::loop(int dt) {
   angle = a(); //radians
 
+  if (angle > 3.14) {
+    angle -= 6.282;
+  }
+
   float dTheta = angle - oldAngle;
   float speed = dTheta / dt * 1E6f;
   wRA.addValue(speed);

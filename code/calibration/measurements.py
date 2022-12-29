@@ -31,8 +31,8 @@ alpha = []
 
 for m in reversed(range(0,len(measures))):
     voltage   = measures[m][0]
-    u.append(voltage)
-    position  = measures[m][1:][0::2] # millimeters
+    u.append(voltage)                 #fixme riga sotto q ui c'era un *1000
+    position  = measures[m][1:][0::2] # millimeters fixme
     deltatime = measures[m][1:][1::2] # time between measurements in microseconds
     time  = [] # seconds
     speed = [] # meters / second

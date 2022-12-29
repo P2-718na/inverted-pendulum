@@ -9,18 +9,44 @@ Motor mot;
 
 Timer controlTimer;
 
+double c[] = {30.789042, 20.549323, 67.716816, 12.689277};
+double A = .251;
+double B = .0473;
+double C = .00804;
+bool controllable = false;
 void control() {
-  <
+  const float x = pos.x();
+  const float v = pos.v();
+  float a = ang->a();
+  const float w = ang->w();
+  if (a > 3.14) {
+    a -= 6.282;
+  }
 
-  //#define DEBUG
+  controllable = (a > -.28 && a < .28) && (x > .03 && x < .3);
+  if (controllable) {
+    digitalWrite(4, HIGH);
+  } else {
+    digitalWrite(4, LOW);
+  }
+  // motor (0.25100000000000011, 0.047271014362306074, -0.0080361899323083148)
+
+  double f = c[0]*(x-.175) + c[1]*v + c[2]*a + c[3]*w;
+  // .02 = deltaT, 0.2593640128 = mass
+  double u = ((1 - A)*v + .02 * f/ .259 + copysignf(C, v)) / B;
+
+  mot.drive(u*255./12. / 2);
+
+  //Serial.println();
+  #define DEBUG
   #ifdef DEBUG
-    Serial.print(pos.x());
+    Serial.print(x);
     Serial.print(" ");
-    Serial.print(pos.v());
+    Serial.print(v);
     Serial.print(" ");
-    Serial.print(ang->a());
+    Serial.print(a);
     Serial.print(" ");
-    Serial.print(ang->w());
+    Serial.print(w);
     Serial.println();
   #endif
 }
@@ -32,11 +58,12 @@ void setup() {
   ang = new Angle();
 
   // Move motor with buttons
+  pinMode(4, OUTPUT);
   pinMode(3, INPUT_PULLUP);
   pinMode(2, INPUT_PULLUP);
 
   // Setup timer
-  controlTimer.setInterval(20); 
+  controlTimer.setInterval(20);
   controlTimer.setCallback(control);
   controlTimer.start();
 }
@@ -54,12 +81,16 @@ void loop() {
   ang->loop(dt);
   controlTimer.update();
 
-  if (digitalRead(3) == LOW) {
-    mot.drive(-32);
-  } else if (digitalRead(2) == LOW) {
-    mot.drive(32);
-  } else {
-    mot.drive(0);
+  if (!controllable) {
+    if (digitalRead(3) == LOW) {
+      digitalWrite(4, HIGH);
+      mot.drive(-32);
+    } else if (digitalRead(2) == LOW) {
+      digitalWrite(4, HIGH);
+      mot.drive(32);
+    } else {
+      mot.drive(0);
+    }
   }
 
   oldTime = time;
