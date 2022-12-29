@@ -23,7 +23,8 @@ void Position::loop(int dt) {
   }
 
   int dTheta = pos - oldPos;
-  double speed = dTheta / dt * 1E6;
+  // Care for order of operations, dTheta and dT are ints, so int division can be a problem.
+  float speed = dTheta * 1E6 / dt;
   speedRA.addValue(speed);
 
   oldPos = pos;
