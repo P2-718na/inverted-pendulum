@@ -10,7 +10,7 @@ Motor mot;
 Timer controlTimer;
 
 void control() {
-  
+  <
 
   //#define DEBUG
   #ifdef DEBUG
