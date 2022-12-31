@@ -5,6 +5,7 @@
 .code
 .ipynb_checkpoints
 .env
+node_modules
 
 ### Latex
 build

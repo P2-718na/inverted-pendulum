@@ -43,14 +43,18 @@ void control() {
   //Serial.println();
   //#define DEBUG
   #ifdef DEBUG
-    Serial.print(x);
-    Serial.print(" ");
-    Serial.print(v);
-    Serial.print(" ");
-    Serial.print(a);
-    Serial.print(" ");
-    Serial.print(w);
-    Serial.println();
+    if (controllable) {
+      Serial.print(x*10);
+      Serial.print(" ");
+      Serial.print(v*10);
+      Serial.print(" ");
+      Serial.print(a*10);
+      Serial.print(" ");
+      Serial.print(w*10);
+      Serial.print(" ");
+      Serial.print(f*10);
+      Serial.println();
+    }
   #endif
 }
 
@@ -98,10 +102,10 @@ void loop() {
   if (!controllable) {
     if (digitalRead(3) == LOW) {
       digitalWrite(4, HIGH);
-      mot.drive(-32);
+      mot.drive(-64);
     } else if (digitalRead(2) == LOW) {
       digitalWrite(4, HIGH);
-      mot.drive(32);
+      mot.drive(64);
     } else {
       mot.drive(0);
     }
