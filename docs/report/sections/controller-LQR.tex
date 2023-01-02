@@ -101,6 +101,9 @@ dove $P$ è la soluzione all'equazione di Ricciati a tempo discreto (\textsc{dar
     \label{eq:ricciati}
   \end{equation}%
 \end{framed}%
-Calcolare i coefficienti del controller significa risolvere l'equazione \eqref{eq:ricciati} e trovare il vettore $K$.
+Calcolare i coefficienti del controller significa risolvere l'equazione \eqref{eq:ricciati} e trovare il vettore $K$
+\footnote{In realtà, manca un ultimo dettaglio implementativo: bisogna trovare una relazione tra la forzante $f$ e
+la tensione $V$ da applicare al motore. I dettagli sono abbastanza noiosi e li ho riassunti in appendice \ref{subsec:calibrazione-motore}.}.
+
 
 %todo spiega come mai c'è da risolvere equazione di ricciati
