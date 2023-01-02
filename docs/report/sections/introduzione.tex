@@ -23,7 +23,7 @@ caso in cui il pendolo parte già in prossimità della posizione verticale. Stra
 \emph{swing-down} non saranno oggetto del mio studio.
 
 
-\subsection{Controller \textsc{LQR}}\label{subsec:intro-lqg}
+\subsection{Controller \textsc{LQR}}\label{subsec:intro-lqr}
 In generale, nello studio del controllo di un sistema, dobbiamo tenere in considerazione del fatto che la forzante
 $\mathbf u$ ha un certo costo associato.
 Questo è da intendersi sia come costo \emph{materiale} (i.e. il costo della corrente per mettere in moto
@@ -35,26 +35,25 @@ Per spiegare cosa si intende con \emph{ottimale}, conviene citare direttamente l
 da un teorema:
 % also todo, magari cita il libro di Brunton
 
-\begin{framed} %todo fai qualcosa di carino
-  Un controller \textsc{LQR} è un sistema dinamico con input $\mathbf y$, output $\mathbf u$ e stato interno
+\begin{framed}
+  \textbf{DEF}
+  Un controller \textsc{lqr} è un sistema dinamico con input $\mathbf y$, output $\mathbf u$ e stato interno
   $\hat{\mathbf x}$: %fixme questa è la def di lqg
   \begin{equation}
     \begin{aligned}[c]
       \frac d {dt} \hat {\mathbf x} &= (A-K_f C - B K_r) \hat{\mathbf x} + K_f \mathbf y \\ %fixme matrices need to be not itlaics
       \mathbf u               &= -K_r \hat{\mathbf x}
     \end{aligned}
-    \label{eq:lqg}
+    \label{eq:lqr}
   \end{equation}
 \end{framed}
-\begin{framed} %todo fai qualcosa di carino
-  Il controller descritto in %todo ref
-  minimizza la seguente funzione di costo, mediata su molte realizzazioni del rumore $\mathbf w_d$:
+\begin{framed}
+  \textbf{THM}
+  Il controller descritto in \eqref{eq:lqr} minimizza la funzione costo definita come:
   \begin{equation}
-    J(t) \doteq \left<
-      \int_0^t  ds\ \mathbf{x} (s)^* Q \mathbf {x} (s) + \mathbf {u} (s)^* R \mathbf {u} (s) %todo t o +\infty?
-      % fixme def sbagliata
-    \right>
-    \label{eq:lqg-costo}
+    J(t) \doteq
+      \int_0^{+\infty} \left[ \mathbf{x} (s)^* Q \mathbf {x} (s) + \mathbf {u} (s)^* R \mathbf {u} (s) \right] ds
+    \label{eq:lqr-costo}
   \end{equation}
 \end{framed}
 

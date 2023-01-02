@@ -8,7 +8,7 @@
 node_modules
 
 ### Latex
-build
+docs/report/build
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
@@ -317,7 +317,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
+docs/report/build/
 develop-eggs/
 dist/
 downloads/
