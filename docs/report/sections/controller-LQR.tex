@@ -1,0 +1,106 @@
+\section{Sviluppo del controller \textsc{LQG}}\label{sec:lqg}
+\subsection{Discretizzazione del sistema}\label{subsec:discretizzazione}
+Nella sezione \ref{subsec:intro-lqr} ho spiegato come funziona un controller \textsc{lqr} per sistemi a \emph{tempo continuo}.
+Il sistema che ho realizzato, tuttavia, non può raccogliere dati dai sensori in modo continuo: tra un osservazione
+$\mathbf y_k$ e la successiva $\mathbf y_{k+1}$ passa un certo intervallo di tempo $\Delta t$.
+Tutte le considerazioni fatte finora continuano a valere, ma dal punto di vista pratico è necessario discretizzare il sistema.
+Vogliamo trovare le matrici $A_d$ e $B_d$ tali cui le equazioni
+\begin{equation}
+  \begin{aligned}
+    \mathbf{x}_{k+1} = A_d \mathbf{x}_k + B_d f_k
+  \end{aligned}
+  \label{eq:moto-discreto}
+\end{equation}
+approssimino meglio le \eqref{eq:state-space} fissato un $\Delta t > 0$.
+Si può dimostrare\cite{brunton2019data}
+che valgono:
+\begin{equation}
+  \begin{aligned}
+    A_d &= e^{A\Delta t} \\
+    B_d &= B\left( \int_0^{\Delta t} e^{A \tau} d\tau \right)
+  \end{aligned}
+  \label{eq:discrete-mapping}
+\end{equation}
+Tuttavia, operativamente, per $\Delta t \ll 1$, possiamo trovare velocemente una soluzione approssimata per \eqref{eq:discrete-mapping}:
+\begin{equation}
+  \begin{aligned}
+    \mathbf x_{k+1} &\approx x_k + \dot x|_k \Delta t\\
+      &\approx \mathbf x_k + (A \mathbf x_k + B f_k) \Delta t\\
+      &\approx (I + \Delta t A) \mathbf x_k + B \Delta t f_k\\
+  \end{aligned}
+  \label{eq:discrete-mapping-approx}
+\end{equation}
+Le matrici che cerchiamo sono quindi:
+\begin{equation}
+  \begin{aligned}
+  A_d &=
+  \left(\begin{array}{cccc}1&\Delta t&0&0\\0&1&-\frac{3gm}{m+4M}\Delta t&0\\0&0&1&\Delta t\\0&0&-\frac{6g(m+M)}{l(m+4M)} \Delta t&1\\\end{array}\right)
+  \\
+  B_d &=
+  \left(\begin{array}{c}0\\\frac{4}{m+4M} \Delta t\\0\\\frac{6}{lm+4lM} \Delta t\\\end{array}\right)
+  \label{eq:Ad-e-Bd}
+  \end{aligned}
+\end{equation}
+
+\subsection{Controllabilità del sistema}\label{subsec:controllabilità}
+Prima di procedere con il calcolo dei coefficienti del controller, dobbiamo accertarci che il sistema sia \emph{controllabile}.
+Condizione necessaria e sufficiente per la controllabilità è che la \emph{matrice di controllabilità}, definita in \eqref{eq:matrice-controllabilità}
+abbia rango massimo\footnote{
+  In realtà, è necessario anche che gli autovalori di $A$ non abbiano la forma $\frac {2k\pi i} {\Delta t}, \forall k \in \mathbb Z_0$.
+  Si può verificare facilmente questa condizione fissando qualche valore numerico (cosa che farò nella sezione \ref{sec:risultati}); per
+  ora assumerò che sia soddisfatta (in ogni caso, gli autovalori di $A$ dipendono solo da parametri razionali, quindi è
+  pressochè impossibile che assumano valori multipli di $\pi$).
+}%
+\footnote{
+  Questo test per la controllabilità non mi da alcuna informazione su \emph{quanto} sia controllabile il mio sistema.
+  Esistono altri metodi che permettono di ottenere queste informazioni (e.g. si può calcolare il Gramiano
+  $W=\int_0^{+\infty}e^{As}BB^*e^{A^*s}\ ds$ e studiarne gli autovalori).
+}
+\cite{sontag2013mathematical}.
+
+\begin{framed}
+  \textbf{DEF} Matrice di controllabilità
+  \begin{equation}
+    \mathcal C_d \doteq \left[
+      \begin{matrix}
+        B_d & A_dB_d & A_d^2B_d & \ldots & A_d^{n-1}B_d
+      \end{matrix}
+      \right]
+    \label{eq:matrice-controllabilità}
+  \end{equation}
+\end{framed}
+
+Svolgendo i calcoli, si trova che il sistema \eqref{eq:A-e-B} è sempre controllabile\footnote{Assumendo che tutti i
+parametri siano positivi.}.
+
+\subsection{Calcolo dei coefficienti del controller}\label{calcolo-coefficienti}
+Definisco la funzione costo per il sistema \eqref{eq:discrete-mapping}:
+\begin{equation}
+  J(t) =
+  \sum_{k=0}^{+\infty} \left[ \mathbf{x}_k^* Q \mathbf {x}_k + f_k R f_k \right]
+  \label{eq:lqr-costo-discreto}
+\end{equation}
+si può dimostrare\cite{chow1975analysis} che la soluzione $f = f(\mathbf x)$ ottimale per il problema di controllo al tempo $t = k \Delta t$ è data da:
+% yeet subscript t per infinite horizon problem
+\begin{equation}
+  \begin{aligned}
+  f_k^{\text{opt}}(\mathbf x) &= -K y_{k-1} \\
+  \text{con}\ K &= (B_d^*PB_d + R)^{-1}(B_d^*PA_d)
+  \end{aligned}
+  \label{eq:f-opt}
+\end{equation}
+dove $P$ è la soluzione all'equazione di Ricciati a tempo discreto (\textsc{dare})\eqref{eq:ricciati}:%
+\begin{framed}
+  \textbf{DEF} \textsc{dare}
+  \begin{equation}
+    \begin{aligned}
+    P &=A_d^* P A_d\ - \\
+     &-(A_d^* P B_d)(R + B_d^* P B_d)^{-1}(B_d^* P A_d)\ + \\
+    &+ Q
+    \end{aligned}
+    \label{eq:ricciati}
+  \end{equation}%
+\end{framed}%
+Calcolare i coefficienti del controller significa risolvere l'equazione \eqref{eq:ricciati} e trovare il vettore $K$.
+
+%todo spiega come mai c'è da risolvere equazione di ricciati

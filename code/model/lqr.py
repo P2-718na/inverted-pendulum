@@ -17,7 +17,7 @@ def dlqr(A,B,Q,R):
     return -K
 
 l = .38/2 # rod length is 2l
-m = (2*l)*(.006**2)*(3.14/4)*7856 # rod 6 mm diameter, 44cm length, 7856 kg/m^3
+m = (2*l)*(.008**2)*(3.14/4)*7856 # rod 8 mm diameter, 44cm length, 7856 kg/m^3
 M = .175
 dt = .02 # 20 ms
 g = 9.8

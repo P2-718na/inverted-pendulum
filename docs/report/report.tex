@@ -1,6 +1,7 @@
 \documentclass[11pt, a4paper, twocolumn]{ieeeconf}
 \raggedbottom
 
+\usepackage{amsfonts}
 \usepackage{blindtext}
 \usepackage{geometry}
 \usepackage{setspace}
@@ -43,7 +44,7 @@
 % authors, date and title---------------------------------------------------------------
 \author{Matteo Bonacini \\ \getenv{MAT1}}
 \date{\today}
-\title{Stabilizzazione di un pendolo invertito su rotaia}
+\title{Controllo di un pendolo invertito su rotaia}
 %---------------------------------------------------------------------------------------
 \begin{document}
 
@@ -58,10 +59,11 @@
 
   \input{sections/introduzione.tex}
   \input{sections/modello-del-sistema.tex}
-  \input{sections/controller-LQG.tex}
+  \input{sections/controller-LQR.tex}
   \input{sections/controller-PID.tex}
   \input{sections/risultati.tex}
   \input{sections/conclusioni.tex}
+  \input{sections/approfondimenti.tex}
   \input{sections/appendice.tex}
 
 

@@ -99,18 +99,24 @@ Calcolo la Jacobiana:
 In prossimità di $\mathbf x_I$, posso quindi approssimare le equazioni del moto del sistema nella forma
 $\dot {\mathbf x} = A\mathbf x + B f$. $A$ e $B$ valgono:
 \begin{equation}
-  A =
-  \left(\begin{array}{cccc}0&1&0&0\\0&0&-\frac{3gm}{m+4M}&0\\0&0&0&1\\0&0&-\frac{6g(m+M)}{l(m+4M)}&0\\\end{array}\right)
-  \hspace{10px}
-  B =
-  \left(\begin{array}{c}0\\\frac{4}{m+4M}\\0\\\frac{6}{lm+4lM}\\\end{array}\right)
-  \label{eq:A-e-B}
+  \begin{aligned}
+    A &=
+    \left(\begin{array}{cccc}0&1&0&0\\0&0&-\frac{3gm}{m+4M}&0\\0&0&0&1\\0&0&-\frac{6g(m+M)}{l(m+4M)}&0\\\end{array}\right)
+    \\
+    B &=
+    \left(\begin{array}{c}0\\\frac{4}{m+4M}\\0\\\frac{6}{lm+4lM}\\\end{array}\right)
+    \label{eq:A-e-B}
+    \end{aligned}
 \end{equation}
 
 \subsection{Implementazione del sistema}\label{subsec:implementazione-del-sistema}
-Ho realizzato il sistema modellato in sezione \ref{subsec:modello-del-sistema}, così come descritto in fig. %todo add figura
+Ho realizzato il sistema modellato in sezione \ref{subsec:modello-del-sistema}, così come descritto in figura \ref{fig:foto}
 La scelta dei componenti garantisce che l'attrito sia trascurabile.
 Una serie di sensori permette di misurare lo stato del sistema.
-Per maggiori dettagli sui componenti utilizzati, consultare l'appendice %todo add ref.
+I parametri del sistema sono riportati in appendice \ref{subsec:parametri-sistema} in tabella \ref{tab:parametri-sistema}.
 
-
+\begin{figure}[h]
+  \includegraphics{../assets/sistema.pdf} %todo cambia
+  \caption{\emph{Pendolo invertito.}}
+  \label{fig:foto}
+\end{figure}
