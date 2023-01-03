@@ -1,1 +1,29 @@
 \section{Conclusioni}\label{sec:conclusioni}
+\begin{framed}
+  \begin{flushleft}
+  \emph{With great power comes great responsibility}
+  \end{flushleft}
+  \begin{flushright}
+    - Spider Man
+  \end{flushright}
+\end{framed}
+
+Entrambe le strategie di controllo si sono rivelate adatte per questa applicazione;
+ciascuna si porta dietro dei pro e contro.
+
+Il controller \textsc{lqr} ha bisogno di uno studio teorico (e sperimentale) più approfondito prima di poter essere
+applicato ma, in cambio, porta a ottenere risultati nettamente migliori.
+Di contro, il controller \textsc{pid} è meno complesso ma porta a risultati peggiori, seppur accettabili.
+
+Confrontando le figure \ref{fig:int-lqr} e \ref{fig:int-pid} si vede infatti che il controller \textsc{pid} non riesce
+a raggiungere un vero e proprio equilibrio, a differenza di \textsc{lqr}, ma continua ad oscillare attorno al punto
+fisso instabile.
+\textsc{lqr} è meglio di \textsc{pid} anche dal punto di vista energetico (risultato che ci aspettiamo, visto che \textsc{lqr} è
+ottimale).
+
+Ci si potrebbe chiedere se sia possibile espandere il sistema che ho realizzato ad un doppio pendolo invertito;
+la risposta è \emph{probabilmente no}.
+Il meccanismo di controllo e il set di sensori che ho scelto si sono rivelati poco adatti a questo scopo e avrebbero
+bisogno di qualche miglioramento.
+Anche dal punto di vista teorico si potrebbe adattare qualche accorgimento in più per migliorare il risultato (i.e.\ usando
+tecniche di \emph{robust-control} per garantire che il sistema si comporti come vogliamo).

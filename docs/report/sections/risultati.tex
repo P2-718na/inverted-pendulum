@@ -16,9 +16,12 @@ Ho integrato anche $f^*f$ per entrambi i sistemi; il risultato è:
 
 Aggiungo anche che, qualitativamente, ho osservato che il controller \textsc{lqr} funziona meglio del \textsc{pid}, ma
 richiede che i dati in input dei sensori siano più \emph{puliti}.
+Con \textsc{pid} sono riuscito a stabilizzare il pendolo anche usando un sensore a ultrasuoni, che invece ha troppo
+rumore per portare a risultati soddisfacenti con \textsc{lqr}.
+
 
 \begin{figure}[h]
-  \includegraphics[width=0.5\textwidth]{pend-up.jpg}
+  \includegraphics[width=0.47\textwidth]{pend-up.jpg}
   \caption{\emph{Sistema del pendolo invertito stabilizzato.}}
   \label{fig:pend-up}
 \end{figure}
