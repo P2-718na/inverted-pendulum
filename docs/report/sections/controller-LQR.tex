@@ -17,14 +17,14 @@ che valgono:
 \begin{equation}
   \begin{aligned}
     A_d &= e^{A\Delta t} \\
-    B_d &= B\left( \int_0^{\Delta t} e^{A \tau} d\tau \right)
+    B_d &= B\left( \int_0^{\Delta t} e^{A s} ds \right)
   \end{aligned}
   \label{eq:discrete-mapping}
 \end{equation}
 Tuttavia, operativamente, per $\Delta t \ll 1$, possiamo trovare velocemente una soluzione approssimata per \eqref{eq:discrete-mapping}:
 \begin{equation}
   \begin{aligned}
-    \mathbf x_{k+1} &\approx x_k + \dot x|_k \Delta t\\
+    \mathbf x_{k+1} &\approx \mathbf x_k + \dot {\mathbf x}|_k \Delta t\\
       &\approx \mathbf x_k + (A \mathbf x_k + B f_k) \Delta t\\
       &\approx (I + \Delta t A) \mathbf x_k + B \Delta t f_k\\
   \end{aligned}
@@ -103,7 +103,7 @@ dove $P$ è la soluzione all'equazione di Ricciati a tempo discreto (\textsc{dar
 \end{framed}%
 Calcolare i coefficienti del controller significa risolvere l'equazione \eqref{eq:ricciati} e trovare il vettore $K$
 \footnote{In realtà, manca un ultimo dettaglio implementativo: bisogna trovare una relazione tra la forzante $f$ e
-la tensione $V$ da applicare al motore. I dettagli sono abbastanza noiosi e li ho riassunti in appendice \ref{subsec:calibrazione-motore}.}.
+la tensione $V$ da applicare al motore. I dettagli sono abbastanza noiosi e li ho riassunti in appendice \ref{sec:calibrazione-motore}.}.
 
 
 %todo spiega come mai c'è da risolvere equazione di ricciati
