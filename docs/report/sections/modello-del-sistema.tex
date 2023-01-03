@@ -58,7 +58,7 @@ In questo modo trovo le equazioni del moto non lineari:
   \label{eq:moto}
 \end{equation}
 
-Ora faccio un cambio di variabile, in modo da avere un sistema di primo ordine.
+Ora faccio un cambio di variabile, in modo da avere un sistema di primo ordine \eqref{eq:state-space}.
 Ho usato il simbolo $(\ldots)$ al posto di riscrivere le equazioni \eqref{eq:moto} nel sistema.
 \begin{equation}
   \dot {\mathbf x} = \left(
@@ -79,7 +79,7 @@ Ho usato il simbolo $(\ldots)$ al posto di riscrivere le equazioni \eqref{eq:mot
 \end{equation}
 
 I punti di equilibrio del sistema \eqref{eq:state-space} si trovano imponendo: $\dot x = 0 \land \dot \theta = 0
-\land f = 0$ e sono:
+\land u = 0$ e sono:
 \begin{equation}
   \begin{aligned}
     \mathbf x_I &= (x, 0, 0, 0) \to & \text{instabile} \\
@@ -97,7 +97,7 @@ Calcolo la Jacobiana:
 \end{equation}
 
 In prossimità di $\mathbf x_I$, posso quindi approssimare le equazioni del moto del sistema nella forma
-$\dot {\mathbf x} = A\mathbf x + B f$. $A$ e $B$ valgono:
+$\dot {\mathbf x} = A\mathbf x + B u$. $A$ e $B$ valgono:
 \begin{equation}
   \begin{aligned}
     A &=
