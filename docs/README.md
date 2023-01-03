@@ -7,11 +7,11 @@
    ```
 2) `cd` to repository root directory and run
    ```bash
-   pipenv run build:report
+   npm run build:report
    ```
    to compile latex files once, or
    ```bash
-   pipenv run watch:report
+   npm run watch:report
    ```
    to build latex on file change.
 3) Hope you have all the needed dependencies. Otherwise, `tlmgr` is your
