@@ -1,6 +1,7 @@
-\documentclass[11pt, a4paper, twocolumn]{ieeeconf}
+\documentclass[11pt, a4paper, twocolumn]{article}
 \raggedbottom
 
+\usepackage[utf8]{inputenc}
 \usepackage{amsfonts}
 \usepackage{blindtext}
 \usepackage{geometry}
@@ -20,6 +21,7 @@
 \usepackage{url}
 \usepackage{csvsimple}
 \usepackage{framed}
+\usepackage{xurl}
 
 %\titlespacing*{\section}{0px}{3mm}{1mm}
 %\titlespacing*{\subsection}{0px}{3mm}{1mm}
@@ -31,6 +33,11 @@
 }
 
 \graphicspath{ {./assets}, {../../assets} }
+
+% hyphen in bib
+\makeatletter
+\newcommand*\nobreakhyphen{\hbox{-}\nobreak\hskip\z@skip}
+\makeatother
 
 % Allow use of command \getenv{VARNAME}.
 % Taken from: https://tex.stackexchange.com/questions/62010/can-i-access-system-environment-variables-from-latex-for-instance-home
@@ -63,7 +70,6 @@
   \input{sections/controller-PID.tex}
   \input{sections/risultati.tex}
   \input{sections/conclusioni.tex}
-  \input{sections/approfondimenti.tex}
   \input{sections/appendice.tex}
 
 

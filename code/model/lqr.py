@@ -40,14 +40,29 @@ print K
 # x v a w
 print "double c[] = {%f, %f, %f, %f};" % (K[0,0], K[0,1], K[0,2], K[0,3])
 
-nsteps = 250
-time = np.linspace(0, 2, nsteps, endpoint=True)
-xk = np.matrix(".2 ; 0 ; .2 ; 0")
+nsteps = 4 / .0002
+time = np.linspace(0, 4, nsteps, endpoint=True)
+xk = np.matrix(".2 ; 0 ; .1 ; 0")
 
 X = []
 T = []
 U = []
 
+cost = 0
+
+for t in time:
+    uk = 1*xk[0,0] + 1/1000*xk[1,0] + 45*xk[2,0] + 1/4000*xk[3,0]
+    X.append(xk[0,0])
+    T.append(xk[2,0])
+    v = xk[1,0]
+    force = uk
+    accel = force/(M+m)
+    u = ((1-.251)*v + dt*accel)/.047/10
+    U.append(u)
+    xk = A*xk + B*uk*.0002 /9999.
+    cost += u*u*0.02
+    #pid 0.23458108573
+'''
 for t in time:
     uk = K*xk
     X.append(xk[0,0])
@@ -55,16 +70,20 @@ for t in time:
     v = xk[1,0]
     force = uk[0,0]
     accel = force/(M+m)
-    u = ((1-.404)*v + dt*accel)/.055/10
+    u = ((1-.251)*v + dt*accel)/.047/10
     U.append(u)
     xk = A*xk + B*uk
+    cost += u*u*0.02
+    #lqr 0.23458108573'''
 
-plt.plot(time, X, label="cart position, meters")
-plt.plot(time, T, label='pendulum angle, radians')
-plt.plot(time, U, label='control voltage, decavolts')
+plt.plot(time, X, label="$x$ (m)")
+plt.plot(time, T, label="$\\theta$ (rad)")
+plt.plot(time, U, label='$f$ (daV)')
+plt.xlabel("Tempo (s)")
 
 plt.legend(loc='upper right')
 plt.grid()
 plt.show()
 
 #double c[] = {30.789042, 20.549323, 67.716816, 12.689277};
+print(cost)

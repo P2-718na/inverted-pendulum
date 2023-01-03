@@ -21,9 +21,9 @@ measures =[#  questi sono i dati di calibrazione con l'affare settato a 12.01V
 ]
 colormap = plt.cm.prism
 plt.gca().set_color_cycle([colormap(i) for i in np.linspace(0, 0.9, len(measures))])
-plt.ylabel("Cart speed, m/s")
-plt.xlabel("Time, seconds")
-plt.ylim([-1, 1])
+plt.ylabel("Velocita' del carrello (m/s)")
+plt.xlabel("Tempo (s)")
+plt.ylim([-.5, .5])
 
 u     = []
 w0    = []
