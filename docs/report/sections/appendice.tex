@@ -29,9 +29,9 @@
                    &.1 &0 &0 &0 \\ &0 &.0001 &0 &0 \\ &0 &0 &1 &0 \\ &0 &0 &0 &.0001
     \end{matrix}\right)$ \\
     \vspace{5px}
-    $R$ & $\left(\begin{matrix}
-                   .005
-    \end{matrix}\right)$ \\
+    $R$ & %$\left(\begin{matrix}
+                   $.005$ \\
+    %\end{matrix}\right)$ \\
     \vspace{5px}
     $K$ & $\left(\begin{matrix}
                    3.67 \\ 3.85 \\ 22.6 \\ 3.97
@@ -40,7 +40,8 @@
     \bottomrule
   \end{tabular}
   \caption{
-    Parametri adimensionali del controller \textsc{lqr}. Le matrici $Q$ e $R$ sono definite da me, $K$ è stato ricavato.
+    Parametri adimensionali del controller \textsc{lqr}. Le matrici $Q$ e $R$ sono definite da me, $K$ è stato ricavato
+    con il valore di $\Delta t$ riportato in tabella.
   }
   \label{tab:coefficienti-lqr}
 \end{table}
@@ -75,8 +76,8 @@ lineare rispetto a $V$. Per risolvere questo problema, possiamo usare la formula
 
 Ho ricavato i parametri $a$, $b$ e $c$ dal fit in figura \ref{fig:fit}; i valori numerici sono riportati in tabella \ref{tab:fit}.
 
-\begin{figure}[h]
-  \includegraphics[width=0.47\textwidth]{../assets/fit.png} %todo cambia
+\begin{figure}[H]
+  \includegraphics[width=0.47\textwidth]{../assets/fit.png}
   \caption{\emph{Fit dei parametri del motore.}}
   \label{fig:fit}
 \end{figure}

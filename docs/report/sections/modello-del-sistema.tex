@@ -40,7 +40,7 @@ Imposto e risolvo le equazioni di Eulero:
 \begin{equation}
   \left\{
     \begin{aligned}
-      \frac d {dt} \frac {\partial \mathcal L} {\partial \dot x } - \frac {\partial \mathcal L} {\partial  x}&= f \\
+      \frac d {dt} \frac {\partial \mathcal L} {\partial \dot x } - \frac {\partial \mathcal L} {\partial  x}&= u \\
       \frac d {dt} \frac {\partial \mathcal L} {\partial \dot \theta } - \frac {\partial \mathcal L} {\partial \theta}&= 0
     \end{aligned}
   \right.
@@ -51,8 +51,8 @@ In questo modo trovo le equazioni del moto non lineari:
 \begin{equation}
   \left\{
   \begin{aligned}
-    \ddot x &= \frac{2m\sin\theta\left(3g\cos\theta-2l\dot \theta^2\right)-8f}{3m\cos(2\theta)-5m-8M} \\
-    \ddot \theta &= \frac{3\sin\theta \left(lm\dot \theta^2\cos\theta-2g(m+M)\right)+6f\cos\theta}{l\left(3m\cos^2\theta-4(m+M)\right)}
+    \ddot x &= \frac{2m\sin\theta\left(3g\cos\theta-2l\dot \theta^2\right)-8u}{3m\cos(2\theta)-5m-8M} \\
+    \ddot \theta &= \frac{3\sin\theta \left(lm\dot \theta^2\cos\theta-2g(m+M)\right)+6u\cos\theta}{l\left(3m\cos^2\theta-4(m+M)\right)}
   \end{aligned}
   \right.
   \label{eq:moto}
@@ -110,7 +110,7 @@ $\dot {\mathbf x} = A\mathbf x + B f$. $A$ e $B$ valgono:
 \end{equation}
 
 \subsection{Implementazione del sistema}\label{subsec:implementazione-del-sistema}
-Ho realizzato il sistema modellato in sezione \ref{sec:modello-del-sistema}, così come descritto in figura \ref{fig:foto}.
+Ho realizzato il sistema modellato in sezione \ref{subsec:modello-del-sistema}, così come descritto in figura \ref{fig:foto}.
 La scelta dei componenti garantisce che l'attrito sia trascurabile.
 Una serie di sensori permette di misurare lo stato del sistema.
 I parametri del sistema sono riportati in appendice \ref{sec:parametri-sistema} in tabella \ref{tab:parametri-sistema}.

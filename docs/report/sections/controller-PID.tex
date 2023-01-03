@@ -3,11 +3,11 @@ Non ci sono molte considerazioni da fare riguardo allo sviluppo di questo contro
 Si procede alla ricerca dei coefficienti con il metodo \emph{trial-and-error}, controllando prima l'angolo $\theta$ e
 poi la posizione $x$.
 Ho scelto di non includere il termine integrale nel controller, visto che per questa applicazione non è necessario.
-L'espressione finale per $f$ è:
+L'espressione finale per $u$ è:
 
 \begin{equation}
   \begin{aligned}
-  f(t) &= K_{p\theta}\theta + K_{d\theta}\frac{d(\theta - \theta_0)}{dt} +\\
+  u(t) &= K_{p\theta}\theta + K_{d\theta}\frac{d(\theta - \theta_0)}{dt} +\\
   &+ K_{px}x + K_{dx}\frac{d(x - x_0)}{dt}
   \end{aligned}
   \label{eq:pid-control}

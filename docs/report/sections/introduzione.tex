@@ -7,7 +7,7 @@ Il problema che ci poniamo è il seguente:
 \emph{
     Un pendolo è posto su un carrello libero di muoversi orizzontalmente su una rotaia.
     Il carrello è dotato di un motore che gli permette di accelerare. Conoscendo lo stato del sistema
-    $\mathbf x$, trovare un espressione per la forza che deve essere esercitata dal motore $f = f(\mathbf x)$
+    $\mathbf x$, trovare un espressione per la forza che deve essere esercitata dal motore $u = u(\mathbf x)$
     che faccia sì che il pendolo si orienti verso l'alto.
   }
 \end{framed}
@@ -17,7 +17,7 @@ caso in cui il pendolo parte già in prossimità della posizione verticale. Stra
 
 \subsection{Controller \textsc{LQR}}\label{subsec:intro-lqr}
 In generale, nello studio del controllo di un sistema, dobbiamo tenere a mente che la forzante
-$\mathbf u$\footnote{La forzante è una matrice, in forma generale. Nel nostro caso, si riduce allo scalare $f$.}
+$\mathbf u$\footnote{La forzante è una matrice, in forma generale. Nel nostro caso, si riduce allo scalare $u$.}
 che agisce su di esso, ha un certo costo associato.
 Questo è da intendersi sia come costo \emph{materiale} (i.e. il costo della corrente per mettere in moto
 un motore) ma, soprattutto, anche come costo \emph{fisico} (i.e. non si può realizzare un motore che ha potenza
