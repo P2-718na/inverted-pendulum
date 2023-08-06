@@ -1,5 +1,4 @@
 #!/usr/bin/python
-#https://raw.githubusercontent.com/ssloy/tutorials/master/tutorials/pendulum/lqr.py
 import numpy as np
 import scipy.linalg
 import matplotlib.pyplot as plt
@@ -16,17 +15,17 @@ def dlqr(A,B,Q,R):
     K = np.matrix(scipy.linalg.inv(B.T*P*B+R)*(B.T*P*A))
     return -K
 
-l = .38/2 # rod length is 2l
-m = (2*l)*(.008**2)*(3.14/4)*7856 # rod 8 mm diameter, 44cm length, 7856 kg/m^3
+l = .38 # rod length is 2l
+m = .150
 M = .175
 dt = .02 # 20 ms
 g = 9.8
 
-A = np.matrix([[1, dt, 0, 0],[0,1, -(3*m*g*dt)/(7*M+4*m),0],[0,0,1,dt],[0,0,(3*g*(m+M)*dt)/(l*(7*M+4*m)),1]])
-B = np.matrix([[0],[7*dt/(7*M+4*m)],[0],[-3*dt/(l*(7*M+4*m))]])
+A = np.matrix([[1, dt, 0, 0],[0,1, -(3*m*g*dt)/(4*M+m),0],[0,0,1,dt],[0,0,(6*g*(m+M)*dt)/(l*(4*M+m)),1]])
+B = np.matrix([[0],[4*dt/(4*M+m)],[0],[-6*dt/(l*(4*M+m))]])
 
-
-print A,B
+print A
+print B
 
 #Q = np.matrix("1 0 0 0; 0 .0001 0 0 ; 0 0 1 0; 0 0 0 .0001")
 #R = np.matrix(".0005")
@@ -40,7 +39,7 @@ print K
 # x v a w
 print "double c[] = {%f, %f, %f, %f};" % (K[0,0], K[0,1], K[0,2], K[0,3])
 
-nsteps = 4 / .0002
+nsteps = 4 / .02
 time = np.linspace(0, 4, nsteps, endpoint=True)
 xk = np.matrix(".2 ; 0 ; .1 ; 0")
 
@@ -49,7 +48,7 @@ T = []
 U = []
 
 cost = 0
-
+'''
 for t in time:
     uk = 1*xk[0,0] + 1/1000*xk[1,0] + 45*xk[2,0] + 1/4000*xk[3,0]
     X.append(xk[0,0])
